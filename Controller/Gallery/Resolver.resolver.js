@@ -24,17 +24,17 @@ module.exports = {
 
     const gallery = await Gallery.findById(id);
 
-    if (gallery.owner !== req.user.id) {
+    if (!gallery.owner.equals(req.user.id)) {
       throw new createError.Forbidden(ERROR.GALLERY_NOT_OWNED);
     }
 
-    await Gallery.remove({ id });
+    await Gallery.deleteMany({ id });
 
     return true;
   },
 
-  getGallery: async ({ name }) => {
-    const gallery = await Gallery.findOne({ name });
+  getGallery: async ({ id }) => {
+    const gallery = await Gallery.findById(id);
 
     return gallery;
   },
