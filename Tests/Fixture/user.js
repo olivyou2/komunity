@@ -36,7 +36,7 @@ const genRefreshToken = (user) => {
 const insertUser = async (user) => {
   const password = crypto.createHash('SHA256').update(user.password).digest('hex');
   await User.insertMany({
-    id: user.id,
+    _id: user.id,
     name: user.name,
     password,
   });

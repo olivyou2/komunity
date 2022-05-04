@@ -49,7 +49,7 @@ module.exports = {
       throw new createError.Forbidden(ERROR.POST_NOW_OWNED);
     }
 
-    await Post.remove({ id });
+    await Post.deleteMany({ id });
     return true;
   },
 

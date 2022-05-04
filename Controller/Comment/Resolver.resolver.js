@@ -4,6 +4,12 @@ const { Comment, Gallery } = require('../../Models');
 
 module.exports = {
   createComment: async ({ input: { contents, parent, galleryId } }, req) => {
+    const gallery = await Gallery.findById(galleryId);
+
+    if (!gallery) {
+      throw new createError.BadRequest(ERROR.GALLERY_NOT_EXISTS);
+    }
+
     const comment = new Comment();
     comment.parent = parent;
     comment.contents = contents;
@@ -23,7 +29,7 @@ module.exports = {
 
     const gallery = await Gallery.findById(comment.gallery);
 
-    if (!comment.id.equals(req.user.id) && !gallery.owner.equals(req.user.id)) {
+    if (!comment.author.equals(req.user.id) && !gallery.owner.equals(req.user.id)) {
       throw new createError.BadRequest(ERROR.COMMENT_NOW_OWNED);
     }
 
