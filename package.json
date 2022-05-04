@@ -1,0 +1,32 @@
+{
+  "name": "komunity",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "bash test.run.sh",
+    "test": "bash test.test.sh"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/jest": "^27.5.0",
+    "crypto": "^1.0.1",
+    "express": "^4.18.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^16.4.0",
+    "http-errors": "^2.0.0",
+    "i": "^0.3.7",
+    "jest": "^28.0.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb-memory-server": "^8.5.2",
+    "mongoose": "^6.3.2",
+    "random-words": "^1.1.2",
+    "supertest": "^6.2.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.14.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  }
+}
