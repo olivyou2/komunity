@@ -36,6 +36,136 @@ docker build -t komunity .'
 # Docker 인스턴스의 진입점은 index.js 로, 환경변수를 설정해줘야 합니다!
 ````
 
+### User API
+````graphql
+
+type User {
+  id: String!
+  name: String!
+}
+
+type GetUserOutput {
+  user: User!
+  accessToken: String!
+  refreshToken: String!
+}
+
+type AccessTokenOutput {
+  accessToken: String!
+  refreshToken: String!
+}
+
+input UserInput {
+  name: String!
+  password: String!
+}
+
+input TokenInput {
+  refreshToken: String!
+}
+
+type Query {
+  getUser(input: UserInput!): GetUserOutput
+}
+
+type Mutation {
+  createUser(input: UserInput!): User
+  removeUser(input: UserInput!): Boolean
+  refreshToken(input: TokenInput!): AccessTokenOutput
+}
+
+````
+
+### Post API
+````graphql
+type Post {
+  id: String!
+  title: String!
+  contents: String!
+  author: String!
+  gallery: String!
+}
+
+type Id {
+  id: String!
+}
+
+type Query {
+  getPost(postId: String!): Post
+  getPostIds(galleryId: String!): [Id!]!
+}
+
+input createPostInput {
+  title: String!
+  contents: String!
+}
+
+input updatePostInput {
+  title: String
+  contents: String
+}
+
+type Mutation {
+  createPost(input: createPostInput!, galleryId: String!): Post
+  removePost(id: String!): Boolean
+  updatePost(input: updatePostInput!, postId: String!): Boolean
+}
+
+````
+
+### Gallery API
+````graphql
+type Gallery {
+  id: String!
+  name: String!
+  owner: String!
+}
+
+type Id {
+  id: String!
+}
+
+type Query {
+  getGallery(id: String!): Gallery
+  getGalleryIds: [Id]
+}
+
+type Mutation {
+  createGallery(name: String!): Gallery
+  removeGallery(id: String!): Boolean
+}
+````
+
+### Comment API
+````graphql
+type Comment {
+  id: String!
+  author: String!
+  contents: String!
+  parent: String!
+}
+
+type Id {
+  id: String!
+}
+
+type Query {
+  getComment(commentId: String!): Comment
+  getCommentIds(parent: String!): [Id]
+}
+
+input createCommentInput {
+  contents: String!
+  parent: String!
+  galleryId: String!
+}
+
+type Mutation {
+  createComment(input: createCommentInput!): Comment
+  removeComment(commentId: String!): Boolean
+}
+````
+
 ### Stack
 <div style="display:flex;">
 <img src="https://img.shields.io/badge/node-339933?style=for-the-badge&logo=javascript&logoColor=white"> 
